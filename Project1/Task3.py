@@ -3,6 +3,7 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
 import csv
+import re
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -43,3 +44,30 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+"""
+Part A :
+  - we only care about calls
+  - take all calls that originate in Bangalore
+  - then count up the area codes or mobile prefixes they call
+"""
+bangaloreCalls = list(filter(lambda x: x[0][:5] == '(080)', calls))
+codes = {}
+
+for call in bangaloreCalls:
+  # Fixed lines
+  fixedLineCheck = re.match(r"\(([0-9]+)\)", call[0])
+  if len(fixedLineCheck) > 0:
+    if fixedLineCheck in codes.keys():
+      codes[fixedLineCheck] += 1
+    else:
+      codes[fixedLineCheck] = 1
+
+  # Telemarketers
+  if '140' in call[0]:
+    if '140' in codes.keys():
+      codes['140'] += 1
+    else:
+      codes['140'] = 1
+
+print(codes)

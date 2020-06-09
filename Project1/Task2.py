@@ -20,3 +20,16 @@ Print a message:
 September 2016.".
 """
 
+numberActivity = {}
+
+for row in calls:
+  if row[0] in numberActivity.keys():
+    numberActivity[row[0]] += int(row[3])
+  else:
+    numberActivity[row[0]] = int(row[3])
+  if row[1] in numberActivity.keys():
+    numberActivity[row[1]] += int(row[3])
+  else:
+    numberActivity[row[1]] = int(row[3])
+
+print(max(numberActivity, key=numberActivity.get))

@@ -1,17 +1,4 @@
-"""
-Read file into texts and calls.
-It's ok if you don't understand how to read files.
-"""
 import csv
-import unittest
-with open('data/texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
-
-with open('data/calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
-
 
 """
 TASK 0:
@@ -21,15 +8,23 @@ Print messages:
 "Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
 """
 
-def SumMyNumbers(x, y, z):
-	return x + y + z
+def fileHeadAndTail (filename):
+  """
+  Returns the first line and last line of a given file
+  """
+  with open(filename, 'r') as f:
+    reader = csv.reader(f)
+    lines = list(reader)
+    results = {}
+    results['first_record'] = lines[0]
+    results['last_record'] = lines[len(lines)-1]
 
-def myfunction(filename):
-    f=open(filename)
-    maximum = 0
-    for line in f:
-        if maximum < len(line):
-            maximum = len(line)
-        pass
-    f.close()
-    return maximum
+  return results
+
+if __name__ == '__main__':
+  texts = fileHeadAndTail('texts.csv')
+  calls = fileHeadAndTail('calls.csv')
+
+  print ("First records of texts,", texts['first_record'][0], "texts", texts['first_record'][1], "at time", texts['first_record'][2])
+  print ("Last records of calls,", calls['first_record'][0], "texts", calls['last_record'][1], "at time", calls['last_record'][2])
+
