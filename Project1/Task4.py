@@ -25,3 +25,16 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
+outgoingCalls = {call[0] for call in calls}
+incomingCalls = {call[1] for call in calls}
+outgoingTexts = {text[0] for text in texts}
+incomingTexts = {text[1] for text in texts}
+
+possibleTelemarketers = list(
+    outgoingCalls
+    - incomingCalls
+    - outgoingTexts
+    - incomingTexts
+    )
+
+print "These numbers could be telemarketers:", "\n".join(sorted(possibleTelemarketers))

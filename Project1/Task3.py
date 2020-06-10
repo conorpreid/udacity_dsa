@@ -4,6 +4,7 @@ It's ok if you don't understand how to read files.
 """
 import csv
 import re
+from collections import defaultdict
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -45,29 +46,43 @@ to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
 
-"""
-Part A :
-  - we only care about calls
-  - take all calls that originate in Bangalore
-  - then count up the area codes or mobile prefixes they call
-"""
-bangaloreCalls = list(filter(lambda x: x[0][:5] == '(080)', calls))
-codes = {}
+def AggregateBangaloreCallTargets (callList):
+    """
+    Take a list of call data (list of list) and
+    return a dictionary that contains an aggregated
+    view of what area codes and mobile prefixs are called
+    by Bangalore numbers
 
-for call in bangaloreCalls:
-  # Fixed lines
-  fixedLineCheck = re.match(r"\(([0-9]+)\)", call[0])
-  if len(fixedLineCheck) > 0:
-    if fixedLineCheck in codes.keys():
-      codes[fixedLineCheck] += 1
-    else:
-      codes[fixedLineCheck] = 1
+    The rules to identify fixed line, mobile and telemarketer numbers
+    are as strict as possible.
+    """
+    bangaloreCalls = list(filter(lambda x: x[0][:5] == '(080)', callList))
+    codes = defaultdict(int)
 
-  # Telemarketers
-  if '140' in call[0]:
-    if '140' in codes.keys():
-      codes['140'] += 1
-    else:
-      codes['140'] = 1
+    for call in bangaloreCalls:
+      # Fixed lines
+      fixedLineCheck = re.match(r"\(0([0-9]+)\)", call[1])
+      if fixedLineCheck:
+          codes[fixedLineCheck.group().strip("()")] += 1
 
-print(codes)
+      # Mobile Numbers
+      elif call[1].startswith(('7', '8', '9')) and ' ' in call[1]:
+          codes[call[1][:4]] += 1
+
+      # Telemarketers
+      elif str(call[1]).startswith('140'):
+          codes['140'] += 1
+
+    return codes
+
+def DerivePercentBangaloreToBangaloreCalls(callList):
+    bangaloreOriginCallTargets = AggregateBangaloreCallTargets(callList)
+    return float(bangaloreOriginCallTargets['080']) / sum(bangaloreOriginCallTargets.values())
+
+print \
+    "The numbers called by people in Bangalore have codes:", \
+    "\n".join(sorted(AggregateBangaloreCallTargets(calls).keys()))
+
+print \
+    "{0:.0f}%".format(DerivePercentBangaloreToBangaloreCalls(calls) * 100), \
+    "of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
