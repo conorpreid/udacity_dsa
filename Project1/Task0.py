@@ -25,18 +25,20 @@ if __name__ == '__main__':
   texts = fileHeadAndTail('texts.csv')
   calls = fileHeadAndTail('calls.csv')
 
-  print \
-    "First records of texts,", \
-    texts['first_record'][0], \
-    "texts", \
-    texts['first_record'][1], \
-    "at time", \
+  print (
+    "First records of texts,",
+    texts['first_record'][0],
+    "texts",
+    texts['first_record'][1],
+    "at time",
     texts['first_record'][2]
+    )
 
-  print \
-    "Last records of calls,", \
-    calls['first_record'][0], \
-    "texts", \
-    calls['last_record'][1], \
-    "at time", \
+  print (
+    "Last records of calls,",
+    calls['first_record'][0],
+    "texts",
+    calls['last_record'][1],
+    "at time",
     calls['last_record'][2]
+    )

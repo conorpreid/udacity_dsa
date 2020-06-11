@@ -79,10 +79,7 @@ def DerivePercentBangaloreToBangaloreCalls(callList):
     bangaloreOriginCallTargets = AggregateBangaloreCallTargets(callList)
     return float(bangaloreOriginCallTargets['080']) / sum(bangaloreOriginCallTargets.values())
 
-print \
-    "The numbers called by people in Bangalore have codes:", \
-    "\n".join(sorted(AggregateBangaloreCallTargets(calls).keys()))
+print ("The numbers called by people in Bangalore have codes:")
+print ("\n".join(sorted(AggregateBangaloreCallTargets(calls).keys())))
 
-print \
-    "{0:.0f}%".format(DerivePercentBangaloreToBangaloreCalls(calls) * 100), \
-    "of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
+print ("{0:.0f}%".format(DerivePercentBangaloreToBangaloreCalls(calls) * 100), "of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")

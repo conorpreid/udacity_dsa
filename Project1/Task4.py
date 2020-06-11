@@ -37,4 +37,5 @@ possibleTelemarketers = list(
     - incomingTexts
     )
 
-print "These numbers could be telemarketers:", "\n".join(sorted(possibleTelemarketers))
+print ("These numbers could be telemarketers:")
+print('\n'.join(possibleTelemarketers))

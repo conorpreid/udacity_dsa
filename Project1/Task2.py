@@ -28,8 +28,9 @@ for row in calls:
     numberActivity[row[0]] += int(row[3])
     numberActivity[row[1]] += int(row[3])
 
-print \
-    max(numberActivity, key=numberActivity.get), \
-    "spent the longest time,", \
-    numberActivity[max(numberActivity, key=numberActivity.get)], \
+print (
+    max(numberActivity, key=numberActivity.get),
+    "spent the longest time,",
+    numberActivity[max(numberActivity, key=numberActivity.get)],
     "seconds, on the phone during September 2016."
+    )

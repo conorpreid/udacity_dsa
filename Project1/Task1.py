@@ -30,4 +30,4 @@ for row in texts:
   numbers.add(row[0])
   numbers.add(row[1])
 
-print "There are", len(numbers), "different numbers in the records."
+print ("There are", len(numbers), "different numbers in the records.")
