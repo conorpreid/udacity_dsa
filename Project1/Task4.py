@@ -38,4 +38,4 @@ possibleTelemarketers = list(
     )
 
 print ("These numbers could be telemarketers:")
-print('\n'.join(possibleTelemarketers))
+print('\n'.join(sorted(possibleTelemarketers)))
