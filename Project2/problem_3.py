@@ -9,6 +9,11 @@ class HuffmanNode(object):
         self.left = None
         self.right = None
 
+    def __gt__(self, other):
+        if not other or not isinstance(other, HuffmanNode):
+            return -1
+        return self.freq > other.freq
+
 class HuffmanEncoder(object):
 
     def __init__(self):
@@ -89,5 +94,31 @@ if __name__ == "__main__":
     print ("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
     decoded_data = encoder_test_1.decode(encoded_data, tree)
+    print ("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+    print("Test 2")
+    print("-------------")
+    encoder_test_2 = HuffmanEncoder()
+    test_sentence = "a *word*#, anoth__er word, one last CAPITAL WORD."
+    print ("The size of the data is: {}".format(sys.getsizeof(test_sentence)))
+    print ("The content of the data is: {}\n".format(test_sentence))
+    encoded_data, tree = encoder_test_2.encode(test_sentence)
+    print ("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = encoder_test_2.decode(encoded_data, tree)
+    print ("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+    print("Test 3")
+    print("-------------")
+    encoder_test_3 = HuffmanEncoder()
+    test_sentence = "aaaaaaA"
+    print ("The size of the data is: {}".format(sys.getsizeof(test_sentence)))
+    print ("The content of the data is: {}\n".format(test_sentence))
+    encoded_data, tree = encoder_test_3.encode(test_sentence)
+    print ("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = encoder_test_3.decode(encoded_data, tree)
     print ("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
     print ("The content of the encoded data is: {}\n".format(decoded_data))

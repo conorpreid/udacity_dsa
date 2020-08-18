@@ -21,7 +21,7 @@ The time complexity is O(n) where n is the number of folders under the parent st
 The space complexity is also O(n), since we maintain a variable of all files found.
 
 ##### Task 3
-Time Complexity : *O(n)* \
+Time Complexity : *O(n log n)* \
 Space Complexity : *O(n)* \
 I decided to use a *min heap* for this problem, to enable more efficient merging of the frequency dict. The *heapq* library was used extensively for node operations.
 The time complexity overall is O(n log n). While various operations are O(n) (like *make_frequency_dict()*, *make_heap()*, *decode()* etc), the *merge_nodes()* function is O(log n) resulting in overall O(n log n).
@@ -34,7 +34,7 @@ The time complexity is O(n) where n is the number of groups and/or users, and we
 The space complexity is O(1), we only store a single value.
 
 ##### Task 5
-Time Complexity : *O(n)* \
+Time Complexity : *O(1)* \
 Space Complexity : *O(1)* \
 This Blockchain example only includes an *append()* function, neglecting to implement a *search()* or anything else.
 The time complexity is O(1) to add a block to the tail of the linked list.

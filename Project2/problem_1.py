@@ -13,6 +13,8 @@ class LRU_Cache(object):
         self.cache = OrderedDict() #a dict, which is a hashmap
 
     def get(self, key):
+        if self.capacity == 0:
+            raise Exception("Sorry, cannot perform actions on empty cache")
         # Retrieve item from provided key. Return -1 if nonexistent.
         if key in self.cache:
             self.cache.move_to_end(key, last=True)
@@ -23,6 +25,9 @@ class LRU_Cache(object):
     def set(self, key, value):
         # Set the value if the key is not present in the cache.
         # If the cache is at capacity remove the oldest item.
+        if self.capacity == 0:
+            raise Exception("Sorry, cannot perform actions on empty cache")
+
         if len(self.cache) + 1 > self.capacity:
             self.cache.popitem(last=False)
         self.cache[key] = value
@@ -43,3 +48,6 @@ our_cache.set(5, 5)
 our_cache.set(6, 6)
 print(len(our_cache.cache))  # returns 4
 print(our_cache.get(3))      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+
+a_new_cache = LRU_Cache(0) # no capacity
+a_new_cache.set(1, 1) # raises an exception

@@ -8,6 +8,7 @@ class Block:
       self.data = data
       self.previous_hash = previous_hash
       self.hash = self.calc_hash()
+      self.next = None
 
     def calc_hash(self):
         sha = hashlib.sha256()
@@ -16,7 +17,7 @@ class Block:
         return sha.hexdigest()
 
     def __str__(self):
-        return ('Timestamp: {}\nData: {}\nPrevious Hash: {}\nHash: {}\n'.format(self.timestamp, self.data, self.previous_hash, self.hash))
+        return ('Timestamp: {}\nData: {}\nPrevious Hash: {}\nHash: {}\nNext: {}\n'.format(self.timestamp, self.data, self.previous_hash, self.hash, self.next))
 
 class BlockChain:
 
@@ -29,7 +30,11 @@ class BlockChain:
         """
         timestamp = time.gmtime()
         previous_hash = self.tail.hash if self.tail else None
-        self.tail = Block(timestamp, data, previous_hash)
+        new_block = Block(timestamp, data, previous_hash)
+        if self.tail:
+            self.tail.next = new_block
+        self.tail = new_block
+
 
 my_block_chain = BlockChain()
 my_block_chain.append(1)

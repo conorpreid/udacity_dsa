@@ -18,4 +18,8 @@ def find_files(suffix, path):
 
     return files
 
-print(find_files('.c', './test_files/'))
+print(find_files('.c', './test_files/')) # returns all .c files, 3 total
+print(find_files('.py', './test_files/')) # returns all .py files, 2 total
+print(find_files('.sh', './test_files/')) # returns all .sh files, 0 total
+print(find_files('.c', './not_test_files/')) # returns "not a dir"
+print(find_files('', './test_files/')) # returns all files
