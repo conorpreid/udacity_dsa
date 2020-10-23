@@ -33,6 +33,11 @@ class HuffmanEncoder(object):
             heapq.heappush(self.heap, new_node)
 
     def merge_nodes(self):
+        if len(self.heap) == 1: #explicitly handle the case where the heap size is 1
+            node = heapq.heappop(self.heap)
+            node1 = HuffmanNode(None, node.freq)
+            node1.left = node
+            heapq.heappush(self.heap, node1)
         while len(self.heap) > 1:
             node1 = heapq.heappop(self.heap)
             node2 = heapq.heappop(self.heap)
@@ -84,6 +89,7 @@ class HuffmanEncoder(object):
         return decoded_data
 
 if __name__ == "__main__":
+
     print("Test 1")
     print("-------------")
     encoder_test_1 = HuffmanEncoder()
@@ -120,5 +126,18 @@ if __name__ == "__main__":
     print ("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
     decoded_data = encoder_test_3.decode(encoded_data, tree)
+    print ("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+    print("Test 4")
+    print("-------------")
+    encoder_test_4 = HuffmanEncoder()
+    test_sentence = "aaaaaa"
+    print ("The size of the data is: {}".format(sys.getsizeof(test_sentence)))
+    print ("The content of the data is: {}\n".format(test_sentence))
+    encoded_data, tree = encoder_test_4.encode(test_sentence)
+    print ("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    decoded_data = encoder_test_4.decode(encoded_data, tree)
     print ("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
     print ("The content of the encoded data is: {}\n".format(decoded_data))

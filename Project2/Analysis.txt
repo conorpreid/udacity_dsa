@@ -14,11 +14,11 @@ The time complexity here is O(1) since there are no loops, all operations happen
 Space complexity is O(n) since the queue size is configurable and dictates the space required.
 
 ##### Task 2
-Time Complexity : *O(n)* \
+Time Complexity : *O(d*w)* or ~*O(n^2)* \
 Space Complexity : *O(n)* \
 I decided to use recursion here, since the requirement is to handle folder structures of undetermined depth. The essence of the problem is to search until we have found all files, which recursion does well at addressing.
-The time complexity is O(n) where n is the number of folders under the parent structure.
-The space complexity is also O(n), since we maintain a variable of all files found.
+The time complexity is O(d*w) where d is the depth of the folder structure, and w is the width (or number of files) in each folder.
+The space complexity is also O(n), since we maintain a variable of all files found that match the extension.
 
 ##### Task 3
 Time Complexity : *O(n log n)* \
